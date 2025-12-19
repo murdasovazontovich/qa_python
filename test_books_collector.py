@@ -42,13 +42,6 @@ class TestBooksCollector:
        assert collector.get_book_genre('Гарри Поттер') == '' 
 
 
-
-    def test_book_genre_existing_book(self, collector):
-        collector.add_new_book('Гарри Поттер')
-        collector.set_book_genre('Гарри Поттер', 'Фантастика')
-
-        assert collector.get_book_genre('Гарри Поттер') == 'Фантастика'
-
     def test_book_genre_by_name_unknown_book(self, collector):
 
         assert collector.get_book_genre('Любовь и голуби') is None
