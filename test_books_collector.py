@@ -1,12 +1,9 @@
 from main import BooksCollector
 import pytest
 
-class TestBooksCollector:
-    @pytest.fixture
-    def collector(self):
-        return BooksCollector() 
+class TestBooksCollector: 
     
-    @pytest.mark.parametrize('name', ['Гарри Потер', 'Гринч'])
+    @pytest.mark.parametrize('name', ['A', 'A'*40])
     def test_add_new_book_add_two_books(self, collector, name):
         collector.add_new_book(name)
 
@@ -97,11 +94,13 @@ class TestBooksCollector:
         assert 'Гарри Поттер' not in collector.get_list_of_favorites_books()
 
 
-
     
-    def test_get_list_of_favorites_books_returns_added_book(self, collector):
+    def test_get_list_of_favorites_books_returns_current_state(self, collector):
+        collector.add_new_book('Гарри Поттер')
         collector.add_new_book('Гринч')
+
+        collector.add_book_in_favorites('Гарри Поттер')
         collector.add_book_in_favorites('Гринч')
 
-        assert 'Гринч' in collector.get_list_of_favorites_books()
+        assert collector.get_list_of_favorites_books() == ['Гарри Поттер', 'Гринч']
 
